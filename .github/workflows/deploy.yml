@@ -4,7 +4,8 @@ on:
     branches:
       - main
       - dev
-env: MONGODB_DB_NAME:gha-demo
+env:
+  MONGODB_DB_NAME: sample_mflix
 jobs:
   test:
     env:
