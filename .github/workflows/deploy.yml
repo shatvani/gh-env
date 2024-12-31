@@ -10,9 +10,9 @@ jobs:
   test:
     env:
       MONGODB_CLUSTER_ADDRESS: cl01.g0rmj.mongodb.net
-      MONGODB_USERNAME: shatvani
-      MONGODB_PASSWORD: wNYDhwROqMeYiMmG
-      PORT: 3300
+      MONGODB_USERNAME: ${{ secrets.MONGODB_USERNAME }}
+      MONGODB_PASSWORD: ${{ secrets.MONGODB_PASSWORD }}
+      PORT: 8080
     environment: testing
     runs-on: ubuntu-latest
     steps:
@@ -29,7 +29,7 @@ jobs:
         run: |
           npm start &
           npx wait-on http://127.0.0.1:$PORT
-          sleep 10 # wait for the server to be fully up and running
+          sleep 10 # wait 10 sec for the server to be fully up and running
       - name: Run tests
         run: npm test
       - name: Output information
