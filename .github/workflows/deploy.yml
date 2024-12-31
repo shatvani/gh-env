@@ -12,7 +12,7 @@ jobs:
       MONGODB_CLUSTER_ADDRESS: cl01.g0rmj.mongodb.net
       MONGODB_USERNAME: shatvani
       MONGODB_PASSWORD: wNYDhwROqMeYiMmG
-      PORT: 8080
+      PORT: 3300
     environment: testing
     runs-on: ubuntu-latest
     steps:
@@ -26,7 +26,10 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Run server
-        run: npm start & npx wait-on http://127.0.0.1:$PORT
+        run: |
+          npm start &
+          npx wait-on http://127.0.0.1:$PORT
+          sleep 10 # wait for the server to be fully up and running
       - name: Run tests
         run: npm test
       - name: Output information
